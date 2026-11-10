@@ -1,10 +1,18 @@
 ﻿# JPacman — Software Testing
 
+<<<<<<< HEAD
 A collaborative Java project focused on improving test coverage and evaluating the reliability of JPacman, a Pacman-style game from TU Delft.
 
 **Technologies:** Java, JUnit 5, Mockito, jqwik, AssertJ, Gradle
 
 ### Contributions
+=======
+A collaborative Java project focused on improving test coverage and evaluating the reliability of JPacman, an educational Pacman-style game from TU Delft.
+
+**Technologies:** Java · JUnit 5 · Mockito · jqwik · AssertJ · Gradle
+
+## My Contributions
+>>>>>>> e504d31d4dda06cc92f1f5db5470927140c1ec08
 
 - Developed unit and property-based tests for directions, occupants, point calculator loading, and level behavior.
 - Tested expected behavior, edge cases, and input boundaries.
@@ -12,7 +20,11 @@ A collaborative Java project focused on improving test coverage and evaluating t
 - Applied mutation testing and test-driven development to evaluate and improve tests.
 - Collaborated on test planning, reviewing results, and integrating tests.
 
+<<<<<<< HEAD
 ### Getting Started
+=======
+## Getting Started
+>>>>>>> e504d31d4dda06cc92f1f5db5470927140c1ec08
 
 Install Git and a Java JDK compatible with the project's Gradle configuration, then clone the repository:
 
@@ -31,7 +43,15 @@ Run these commands from the `jpacman` directory:
 
 Test reports are generated at `build/reports/tests/test/index.html` within `jpacman/`.
 
+<<<<<<< HEAD
 ### Acknowledgements
+=======
+## What I Learned
+
+Writing maintainable tests, evaluating test effectiveness beyond coverage, and collaborating on testing an existing Java application.
+
+## Acknowledgements
+>>>>>>> e504d31d4dda06cc92f1f5db5470927140c1ec08
 
 JPacman was originally developed at **Delft University of Technology (TU Delft)**. My contributions focus on testing and related coursework.
 
