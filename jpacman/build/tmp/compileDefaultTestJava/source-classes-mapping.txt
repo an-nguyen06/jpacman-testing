@@ -1,0 +1,18 @@
+nl/tudelft/jpacman/fuzzer/JPacmanFuzzer.java
+ nl.tudelft.jpacman.fuzzer.JPacmanFuzzer
+nl/tudelft/jpacman/board/SquareTest.java
+ nl.tudelft.jpacman.board.SquareTest
+nl/tudelft/jpacman/integration/StartupSystemTest.java
+ nl.tudelft.jpacman.integration.StartupSystemTest
+nl/tudelft/jpacman/npc/ghost/NavigationTest.java
+ nl.tudelft.jpacman.npc.ghost.NavigationTest
+nl/tudelft/jpacman/sprite/SpriteTest.java
+ nl.tudelft.jpacman.sprite.SpriteTest
+nl/tudelft/jpacman/LauncherSmokeTest.java
+ nl.tudelft.jpacman.LauncherSmokeTest
+nl/tudelft/jpacman/level/LevelTest.java
+ nl.tudelft.jpacman.level.LevelTest
+nl/tudelft/jpacman/board/BoardFactoryTest.java
+ nl.tudelft.jpacman.board.BoardFactoryTest
+nl/tudelft/jpacman/board/BoardTest.java
+ nl.tudelft.jpacman.board.BoardTest

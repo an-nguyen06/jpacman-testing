@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.tudelft.jpacman.level.LevelTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-04-07T04:19:40" hostname="AN" time="0.174">
+  <properties/>
+  <testcase name="startStop()" classname="nl.tudelft.jpacman.level.LevelTest" time="0.063"/>
+  <testcase name="registerSecondPlayer()" classname="nl.tudelft.jpacman.level.LevelTest" time="0.083"/>
+  <testcase name="registerThirdPlayer()" classname="nl.tudelft.jpacman.level.LevelTest" time="0.003"/>
+  <testcase name="registerPlayerTwice()" classname="nl.tudelft.jpacman.level.LevelTest" time="0.002"/>
+  <testcase name="registerPlayer()" classname="nl.tudelft.jpacman.level.LevelTest" time="0.003"/>
+  <testcase name="stop()" classname="nl.tudelft.jpacman.level.LevelTest" time="0.002"/>
+  <testcase name="start()" classname="nl.tudelft.jpacman.level.LevelTest" time="0.003"/>
+  <testcase name="noStart()" classname="nl.tudelft.jpacman.level.LevelTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

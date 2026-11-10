@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LevelFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jpacman</a> &gt; <a href="index.source.html" class="el_package">nl.tudelft.jpacman.level</a> &gt; <span class="el_source">LevelFactory.java</span></div><h1>LevelFactory.java</h1><pre class="source lang-java linenums">package nl.tudelft.jpacman.level;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import nl.tudelft.jpacman.board.Board;
+import nl.tudelft.jpacman.board.Direction;
+import nl.tudelft.jpacman.board.Square;
+import nl.tudelft.jpacman.npc.Ghost;
+import nl.tudelft.jpacman.npc.ghost.GhostColor;
+import nl.tudelft.jpacman.npc.ghost.GhostFactory;
+import nl.tudelft.jpacman.points.PointCalculator;
+import nl.tudelft.jpacman.sprite.PacManSprites;
+import nl.tudelft.jpacman.sprite.Sprite;
+
+/**
+ * Factory that creates levels and units.
+ *
+ * @author Jeroen Roosen 
+ */
+public class LevelFactory {
+
+    private static final int GHOSTS = 4;
+    private static final int BLINKY = 0;
+    private static final int INKY = 1;
+    private static final int PINKY = 2;
+    private static final int CLYDE = 3;
+
+    /**
+     * The default value of a pellet.
+     */
+    private static final int PELLET_VALUE = 10;
+
+    /**
+     * The sprite store that provides sprites for units.
+     */
+    private final PacManSprites sprites;
+
+    /**
+     * Used to cycle through the various ghost types.
+     */
+    private int ghostIndex;
+
+    /**
+     * The factory providing ghosts.
+     */
+    private final GhostFactory ghostFact;
+
+    /**
+     * The way to calculate points upon collisions.
+     */
+    private final PointCalculator pointCalculator;
+
+    /**
+     * Creates a new level factory.
+     *
+     * @param spriteStore
+     *            The sprite store providing the sprites for units.
+     * @param ghostFactory
+     *            The factory providing ghosts.
+     * @param pointCalculator
+     *            The algorithm to calculate the points.
+     */
+    public LevelFactory(PacManSprites spriteStore,
+                        GhostFactory ghostFactory,
+<span class="fc" id="L67">                        PointCalculator pointCalculator) {</span>
+<span class="fc" id="L68">        this.sprites = spriteStore;</span>
+<span class="fc" id="L69">        this.ghostIndex = -1;</span>
+<span class="fc" id="L70">        this.ghostFact = ghostFactory;</span>
+<span class="fc" id="L71">        this.pointCalculator = pointCalculator;</span>
+<span class="fc" id="L72">    }</span>
+
+    /**
+     * Creates a new level from the provided data.
+     *
+     * @param board
+     *            The board with all ghosts and pellets occupying their squares.
+     * @param ghosts
+     *            A list of all ghosts on the board.
+     * @param startPositions
+     *            A list of squares from which players may start the game.
+     * @return A new level for the board.
+     */
+    public Level createLevel(Board board, List&lt;Ghost&gt; ghosts, List&lt;Square&gt; startPositions) {
+
+        // We'll adopt the simple collision map for now.
+<span class="fc" id="L88">        CollisionMap collisionMap = new PlayerCollisions(pointCalculator);</span>
+
+<span class="fc" id="L90">        return new Level(board, ghosts, startPositions, collisionMap);</span>
+    }
+
+    /**
+     * Creates a new ghost.
+     *
+     * @return The new ghost.
+     */
+    Ghost createGhost() {
+<span class="fc" id="L99">        ghostIndex++;</span>
+<span class="fc" id="L100">        ghostIndex %= GHOSTS;</span>
+<span class="pc bpc" id="L101" title="1 of 5 branches missed.">        switch (ghostIndex) {</span>
+            case BLINKY:
+<span class="fc" id="L103">                return ghostFact.createBlinky();</span>
+            case INKY:
+<span class="fc" id="L105">                return ghostFact.createInky();</span>
+            case PINKY:
+<span class="fc" id="L107">                return ghostFact.createPinky();</span>
+            case CLYDE:
+<span class="fc" id="L109">                return ghostFact.createClyde();</span>
+            default:
+<span class="nc" id="L111">                return new RandomGhost(sprites.getGhostSprite(GhostColor.RED));</span>
+        }
+    }
+
+    /**
+     * Creates a new pellet.
+     *
+     * @return The new pellet.
+     */
+    public Pellet createPellet() {
+<span class="fc" id="L121">        return new Pellet(PELLET_VALUE, sprites.getPelletSprite());</span>
+    }
+
+    /**
+     * Implementation of an NPC that wanders around randomly.
+     *
+     * @author Jeroen Roosen
+     */
+    private static final class RandomGhost extends Ghost {
+
+        /**
+         * The suggested delay between moves.
+         */
+        private static final long DELAY = 175L;
+
+        /**
+         * Creates a new random ghost.
+         *
+         * @param ghostSprite
+         *            The sprite for the ghost.
+         */
+        RandomGhost(Map&lt;Direction, Sprite&gt; ghostSprite) {
+<span class="nc" id="L143">            super(ghostSprite, (int) DELAY, 0);</span>
+<span class="nc" id="L144">        }</span>
+
+        @Override
+        public Optional&lt;Direction&gt; nextAiMove() {
+<span class="nc" id="L148">            return Optional.empty();</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.tudelft.jpacman.npc.ghost.NavigationTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-04-07T04:19:40" hostname="AN" time="0.121">
+  <properties/>
+  <testcase name="testSimplePath()" classname="nl.tudelft.jpacman.npc.ghost.NavigationTest" time="0.028"/>
+  <testcase name="testNoTraveller()" classname="nl.tudelft.jpacman.npc.ghost.NavigationTest" time="0.008"/>
+  <testcase name="testNoShortestPath()" classname="nl.tudelft.jpacman.npc.ghost.NavigationTest" time="0.01"/>
+  <testcase name="testFullSizedLevel()" classname="nl.tudelft.jpacman.npc.ghost.NavigationTest" time="0.035"/>
+  <testcase name="testShortestPathEmpty()" classname="nl.tudelft.jpacman.npc.ghost.NavigationTest" time="0.007"/>
+  <testcase name="testNoNearestUnit()" classname="nl.tudelft.jpacman.npc.ghost.NavigationTest" time="0.007"/>
+  <testcase name="testCornerPath()" classname="nl.tudelft.jpacman.npc.ghost.NavigationTest" time="0.01"/>
+  <testcase name="testNearestUnit()" classname="nl.tudelft.jpacman.npc.ghost.NavigationTest" time="0.011"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

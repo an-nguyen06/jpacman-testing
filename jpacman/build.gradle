@@ -1,0 +1,115 @@
+plugins {
+    id 'application'
+    id 'java'
+    id 'jacoco'
+    id 'checkstyle'
+    id 'pmd'
+    id 'com.github.spotbugs' version '4.2.3'
+}
+
+sourceSets {
+    defaultTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/default-test/java')
+        }
+        resources.srcDir file('src/default-test/resources')
+    }
+}
+
+configurations {
+    defaultTestCompile.extendsFrom testCompile
+    defaultTestImplementation.extendsFrom testImplementation
+    defaultTestRuntime.extendsFrom testRuntime
+}
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    implementation("com.google.guava:guava:$guavaVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
+    testImplementation("org.mockito:mockito-core:$mockitoVersion")
+    testImplementation("org.assertj:assertj-core:$assertjVersion")
+    testImplementation("net.jqwik:jqwik:1.6.4")
+    compileOnly("com.github.spotbugs:spotbugs-annotations:$spotbugsAnnotationsVersion")
+}
+
+task defaultTest(type: Test) {
+    testClassesDirs = sourceSets.defaultTest.output.classesDirs
+    classpath = sourceSets.defaultTest.runtimeClasspath
+}
+test.dependsOn defaultTest
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+defaultTest {
+    useJUnitPlatform()
+}
+
+jacoco {
+    toolVersion = jacocoVersion
+}
+
+jacocoTestReport {
+    dependsOn test, defaultTest
+    executionData.setFrom(fileTree(buildDir).include(
+            "/jacoco/test.exec",
+            "/jacoco/defaultTest.exec"
+    ))
+
+    reports {
+        csv.required = true
+        xml.required = true
+        html.required = true
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'jdk/**',
+                    'sun/**',
+                    '**/module-info.class'
+            ])
+        }))
+    }
+}
+
+
+
+checkstyle {
+    configFile file("checkstyle.xml")
+    ignoreFailures = true
+}
+
+pmd {
+    ruleSetFiles "pmd-rules.xml"
+    ruleSets = []
+}
+
+
+
+task staticAnalysis(type: GradleBuild) {
+    tasks = [
+        'clean',
+        'checkstyleMain',
+        'checkstyleTest',
+        'checkstyleDefaultTest',
+        'pmdMain',
+        'pmdTest',
+        'pmdDefaultTest',
+        'spotbugsMain',
+        'spotbugsTest',
+        'spotbugsDefaultTest',
+    ]
+}
+
+mainClassName = 'nl.tudelft.jpacman.Launcher'
