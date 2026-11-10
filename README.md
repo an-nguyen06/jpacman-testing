@@ -1,6 +1,5 @@
 ﻿# JPacman — Software Testing
 
-<<<<<<< HEAD
 A collaborative Java project focused on improving test coverage and evaluating the reliability of JPacman, a Pacman-style game from TU Delft.
 
 **Technologies:** Java, JUnit 5, Mockito, jqwik, AssertJ, Gradle
